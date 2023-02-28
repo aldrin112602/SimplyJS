@@ -6,11 +6,12 @@
       const data = { username, password };
       // display data
       console.log(data);
+      alert(JSON.stringify(data));
     };
     return (
-      <form method='post' className='col-7 bg-dark p-5 text-white' onSubmit={handleLogin}>
-        <h1 className='text-center'>Log-In</h1>
-        <label className='form-label'>Enter your Username</label>
+      <form method="post" className="col-12 col-md-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
+        <h1 className="text-center">Log-In</h1>
+        <label className="form-label">Enter your Username</label>
         <input
           placeholder='Username'
           className='form-control'
@@ -19,6 +20,7 @@
           required={true}
           onInput={(e) => (username = e.target.value)}
         ></input>
+        
         <label className='form-label'>Enter your Password</label>
         <input
           placeholder='Password'
