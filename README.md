@@ -1,4 +1,4 @@
-# Simply.js Example
+# SimplyJS Intro
 Simply is a lightweight framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
 ```javascript
 const Container = () => {
