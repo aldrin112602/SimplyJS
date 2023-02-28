@@ -6,6 +6,7 @@
       const data = { username, password };
       // display data
       console.log(data);
+      alert(data);
     };
     return (
       <form method="post" className="col-12 col-md-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
