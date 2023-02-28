@@ -30,7 +30,7 @@ Simply.render(Container, "#root", () => {
 });
 ```
 ---
-This code will render a `div` element with a class of `"container"`, containing an `h1` element with the text `"Hello, world!"` and a `p` element with some sample text. It will then append that div to the element with an ID of `"app"` in your HTML document.
+This code will render a `div` element with a class of `"container"`, containing an `h1` element with the text `"Hello, world!"` and a `p` element with some sample text. It will then append that div to the element with an ID of `"root"` in your HTML document.
 
 The `Simply.render` method takes 3 arguments: a component function, container element and callback function. The component function should return a tree of Simply elements, which are plain JavaScript objects that describe a UI element. These elements can be nested, just like regular HTML, to build up a complete user interface.
 
@@ -73,8 +73,8 @@ const Form = () => {
 
   return (
     <form method="post" className="col-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
-      <h1 className="text-center">'Log-In'</h1>,
-      <label className="form-label">'Enter your Username'</label>,
+      <h1 className="text-center">Log-In</h1>
+      <label className="form-label">Enter your Username</label>
       <input
         placeholder="Username"
         className="form-control"
@@ -83,7 +83,7 @@ const Form = () => {
         required={true}
         onInput={(e) => (username = e.target.value)}
       ></input>
-      ,<label className="form-label">'Enter your Password'</label>,
+      <label className="form-label">Enter your Password</label>
       <input
         placeholder="Password"
         className="form-control"
@@ -92,10 +92,10 @@ const Form = () => {
         required={true}
         onInput={(e) => (password = e.target.value)}
       ></input>
-      ,
+      
       <div className="d-grid mt-4">
         <button type="submit" className="btn btn-primary btn-block">
-          'Login now'
+          Login now
         </button>
       </div>
     </form>
@@ -157,8 +157,8 @@ Now create `index.html`
             className="col-7 bg-dark p-5 text-white"
             onSubmit={handleLogin}
           >
-            <h1 className="text-center">'Log-In'</h1>,
-            <label className="form-label">'Enter your Username'</label>,
+            <h1 className="text-center">Log-In</h1>,
+            <label className="form-label">Enter your Username</label>
             <input
               placeholder="Username"
               className="form-control"
@@ -167,7 +167,7 @@ Now create `index.html`
               required={true}
               onInput={(e) => (username = e.target.value)}
             ></input>
-            ,<label className="form-label">'Enter your Password'</label>,
+            <label className="form-label">Enter your Password</label>
             <input
               placeholder="Password"
               className="form-control"
@@ -176,10 +176,9 @@ Now create `index.html`
               required={true}
               onInput={(e) => (password = e.target.value)}
             ></input>
-            ,
             <div className="d-grid mt-4">
               <button type="submit" className="btn btn-primary btn-block">
-                'Login now'
+                Login now
               </button>
             </div>
           </form>

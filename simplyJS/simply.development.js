@@ -29,12 +29,18 @@ const Simply = (() => {
         return src.content;
       })
     ).then((content) => {
-      eval(jsxToJs(content));
+      console.log(jsxToJs(content));
+      try {
+        eval(jsxToJs(content));
+      } catch (err) {
+        console.error(err);
+        console.trace();
+      }
     });
   }
 
   function jsxToJs(content) {
-    const jsCode = content
+    let jsCode = content
       .join("\n\n")
       .replace(/<(\w+)/g, 'createElement("$1", { ')
       .replace(/(\w+)="(.*?)"/g, '$1: "$2", ')
@@ -44,11 +50,27 @@ const Simply = (() => {
       .replace(/{ >/g, "null,")
       .replace(/className:/g, "className: ")
       .replace(/onClick:/g, "onClick: ")
-      .replace(/<\/\w+>/g, ")")
+      .replace(/<\/\w+>/g, "),")
       .replace(/(\w+)>/g, "")
+      .replace(/(\w+)>(.*?)</g, '$1: "$2", ')
       .replace(/>\s+</g, ",")
       .replace(/;\s*,/g, ",")
-      .replace(/­/g, "");
+      .replace(/­/g, "")
+      .replace(/,\s*\)/g, ")");
+      
+      let regEx = /},\s(.+?)\)/g;
+    let textNodes = jsCode.match(regEx);
+    let copy = textNodes;
+    const filtered = textNodes.map((node) =>
+      node.match(/},\s(.+?)\)/)[1].trim()
+    );
+    filtered
+      .map((item, i) => {
+        return copy[i].replace(item, `'${item}'`);
+      })
+      .forEach((item, i) => {
+        jsCode = jsCode.replace(copy[i], item);
+      });
     return jsCode;
   }
 
@@ -89,23 +111,18 @@ const Simply = (() => {
       callback();
     }
     if (typeof container === "string") {
-      // If the container is a string, find the element with the matching ID
       container = document.querySelector(container);
     }
     if (typeof component === "function") {
-      // If the component is a function, call it to get the element to render
       const element = component();
       if (container) {
-        // Append the element to the container if it exists
         container.appendChild(element);
       }
     } else if (typeof component === "object" && component instanceof Element) {
-      // If the component is already an element, just append it to the container
       if (container) {
         container.appendChild(component);
       }
     }
   };
-
   return { render };
 })();
