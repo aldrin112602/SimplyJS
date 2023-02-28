@@ -1,4 +1,21 @@
+/**
+ * @license SimplyJS v1.0.1
+ *
+ * simply.development.js
+ *
+ * (c) Aldrin Caballero | Feb. 28, 2023
+ * https://github.com/aldrin112602/SimplyJS
+ *
+ * License: MIT
+ */
+
+// Immediately Invoked Function Expression (IIFE)
 const Simply = (() => {
+  /**
+   * Finds all script tags with type "text/simply" and extracts their contents or src attributes.
+   * @return {NodeListOf<Element>} List of script tags with type "text/simply"
+   */
+
   const findScript = () => {
     return document.querySelectorAll('script[type="text/simply"]');
   };
@@ -8,6 +25,13 @@ const Simply = (() => {
         ? { hasSrc: true, content: null, src: simplyScript.src }
         : { hasSrc: false, content: simplyScript.innerHTML, src: null };
     });
+
+    /**
+     * Gets the contents of a script tag with a src attribute.
+     *
+     * @param {string} src - The URL of the script file to get.
+     * @return {Promise} Promise that resolves with the contents of the script file.
+     */
 
     const getContents = (src) => {
       return new Promise((resolve, reject) => {
@@ -29,7 +53,6 @@ const Simply = (() => {
         return src.content;
       })
     ).then((content) => {
-      console.log(jsxToJs(content));
       try {
         eval(jsxToJs(content));
       } catch (err) {
@@ -38,7 +61,12 @@ const Simply = (() => {
       }
     });
   }
-
+  /**
+   * Converts JSX code to JavaScript.
+   * @param {Array<string>} content - The content of the script tags.
+   * @return {string} The JavaScript code.
+   *
+   */
   function jsxToJs(content) {
     let jsCode = content
       .join("\n\n")
@@ -57,8 +85,8 @@ const Simply = (() => {
       .replace(/;\s*,/g, ",")
       .replace(/­/g, "")
       .replace(/,\s*\)/g, ")");
-      
-      let regEx = /},\s(.+?)\)/g;
+
+    let regEx = /},\s(.+?)\)/g;
     let textNodes = jsCode.match(regEx);
     let copy = textNodes;
     const filtered = textNodes.map((node) =>
@@ -71,9 +99,19 @@ const Simply = (() => {
       .forEach((item, i) => {
         jsCode = jsCode.replace(copy[i], item);
       });
+    console.log(
+      "%c You are using SimplyJS framework in the browser.\nFor complete documentations, visit on https://github.com/aldrin112602/SimplyJS",
+      "color: lime; font-size: .8rem; background-color: #222;"
+    );
+
     return jsCode;
   }
-
+  /**
+   * Converts a camel case string to a hyphenated string.
+   * @param {string} key - The camel case string to convert.
+   * @return {string} The hyphenated string.
+   *
+   */
   const fromCamelCase = (key) => {
     return key
       .replace(/([A-Z])/g, " $1")
@@ -82,6 +120,13 @@ const Simply = (() => {
       .toLowerCase();
   };
 
+  /**
+   * Creates an element with the specified type, props and children.
+   * @param {string} type - The type of element to create.
+   * @param {Object} props - The properties to apply to the element.
+   * @param {...any} children - The children to add to the element.
+   * @return {Element} The newly created element.
+   */
   const createElement = (type, props, ...children) => {
     const element = document.createElement(type);
     Object.keys(props || {}).forEach((key) => {
@@ -105,9 +150,15 @@ const Simply = (() => {
     return element;
   };
 
+  /**
+   * Renders a component to the specified container.
+   * @param {Function|Element} component - The component to render.
+   * @param {string|Element} container - The container to render the component to.
+   * @param {Function} callback - A callback function to execute after the component has been rendered.
+   */
+
   const render = (component, container, callback) => {
     if (callback && typeof callback === "function") {
-      // Execute the callback function before rendering the component
       callback();
     }
     if (typeof container === "string") {
@@ -124,5 +175,8 @@ const Simply = (() => {
       }
     }
   };
+  /**
+   * export the render function
+   */
   return { render };
 })();
