@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simply JS example</title>
+    <!-- simplyJS script -->
+    <script src="./simplyJS/simply.development.js" defer></script>
+    <!-- botstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- main app -->
+    <div
+      id="root"
+      class="d-flex align-items-center justify-content-center"
+      style="min-height: 100vh"
+    ></div>
+
+    <!-- main simplyJS -->
+    <script src="./Main.js" type="text/simply"></script>
+
+    <!-- or using internal script -->
+    <script  type="text/simply">
+      /*
+      const Form = () => {
+        let username, password;
+        // handle login request
+        const handleLogin = (ev) => {
+          ev.preventDefault();
+          const data = { username, password };
+          // display data
+          console.log(data);
+        };
+        return (
+          <form
+            method="post"
+            className="col-7 bg-dark p-5 text-white"
+            onSubmit={handleLogin}
+          >
+            <h1 className="text-center">'Log-In'</h1>,
+            <label className="form-label">'Enter your Username'</label>,
+            <input
+              placeholder="Username"
+              className="form-control"
+              type="text"
+              name="username"
+              required={true}
+              onInput={(e) => (username = e.target.value)}
+            ></input>
+            ,<label className="form-label">'Enter your Password'</label>,
+            <input
+              placeholder="Password"
+              className="form-control"
+              type="password"
+              name="password"
+              required={true}
+              onInput={(e) => (password = e.target.value)}
+            ></input>
+            ,
+            <div className="d-grid mt-4">
+              <button type="submit" className="btn btn-primary btn-block">
+                'Login now'
+              </button>
+            </div>
+          </form>
+        );
+      };
+      Simply.render(Form, "#root");
+      */
+    </script>
+  </body>
+</html>
