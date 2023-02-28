@@ -12,7 +12,7 @@ First, you'll need to download the `SimplyJS` library and include it in your pro
 or clone this repository
 ## Clone the repository:
 ```bash
-git clone https://github.com/yourusername/simplyjs-example.git
+git clone https://github.com/aldrin112602/SimplyJS.git
 cd simplyjs-example
 ```
 
