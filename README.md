@@ -1,4 +1,36 @@
 # Simply.js Example
+Simply is a lightweight framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
+```javascript
+Simply.render(() => (
+  <div className="container">
+    <h1>'Hello, world!'</h1>
+    <p>'This is a simple example of a component built with Simply.'</p>
+  </div>
+), "#app", () => {
+    console.log('Rendered Success!')
+});
+```
+
+SimplyJS is also similar to ReactJS that use `JSX` syntax:
+
+here the sample compiled output behind, `JSX` to valid JavaScript Syntax:
+```javascript
+const Container = () => {
+  return Simply.createElement("div", { className: "container" },
+    Simply.createElement("h1", null, "Hello, world!"),
+    Simply.createElement("p", null, "This is a simple example of a component built with Simply.")
+  );
+};
+
+Simply.render(Container, "#root", () => {
+    console.log('Rendered Success!')
+});
+```
+---
+This code will render a `div` element with a class of `"container"`, containing an `h1` element with the text `"Hello, world!"` and a `p` element with some sample text. It will then append that div to the element with an ID of `"app"` in your HTML document.
+
+The `Simply.render` method takes 3 arguments: a component function, container element and callback function. The component function should return a tree of Simply elements, which are plain JavaScript objects that describe a UI element. These elements can be nested, just like regular HTML, to build up a complete user interface.
+
 This is a simple example project demonstrating how to use the Simply.js framework.
 ---
 ## Getting Started
