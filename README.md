@@ -9,7 +9,7 @@ const Container = () => {
         </div>
     )
 }
-Simply.render(Container, "#app", () => {
+Simply.render(Container, "#root", () => {
     console.log('Rendered Success!')
 });
 ```
