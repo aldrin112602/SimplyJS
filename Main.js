@@ -8,7 +8,7 @@
       console.log(data);
     };
     return (
-      <form method="post" className="col-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
+      <form method="post" className="col-12 col-md-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
         <h1 className="text-center">'Log-In'</h1>,
         <label className="form-label">'Enter your Username'</label>,
         <input
