@@ -1,11 +1,11 @@
 # SimplyJS Intro
-Simply is a lightweight framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
+Simply is a lightweight JavaScript framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
 ```javascript
 const Container = () => {
     return (
         <div className="container">
-            <h1>'Hello, world!'</h1>
-            <p>'This is a simple example of a component built with Simply.'</p>
+            <h1>Hello, world!</h1>
+            <p>This is a simple example of a component built with Simply.</p>
         </div>
     )
 }
@@ -19,9 +19,11 @@ SimplyJS is also similar to ReactJS that use `JSX` syntax:
 here the sample compiled output behind, `JSX` to valid JavaScript Syntax:
 ```javascript
 const Container = () => {
-  return Simply.createElement("div", { className: "container" },
-    Simply.createElement("h1", null, "Hello, world!"),
-    Simply.createElement("p", null, "This is a simple example of a component built with Simply.")
+  return (
+    createElement("div", { className: "container" },
+       createElement("h1", null, "Hello, world!"),
+       createElement("p", null, "This is a simple example of a component built with Simply.")
+    );
   );
 };
 
