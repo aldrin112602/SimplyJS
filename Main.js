@@ -1,41 +1,68 @@
-  const Form = () => {
-    let username, password;
-    // handle login request
-    const handleLogin = (ev) => {
-      ev.preventDefault();
-      const data = { username, password };
-      // display data
-      console.log(data);
-      alert(JSON.stringify(data));
-    };
-    return (
-      <form method="post" className="col-12 col-md-7 bg-dark p-5 text-white" onSubmit={handleLogin}>
-        <h1 className="text-center">Log-In</h1>
-        <label className="form-label">Enter your Username</label>
-        <input
-          placeholder='Username'
-          className='form-control'
-          type='text'
-          name='username'
-          required={true}
-          onInput={(e) => (username = e.target.value)}
-        ></input>
-        
-        <label className='form-label'>Enter your Password</label>
-        <input
-          placeholder='Password'
-          className='form-control'
-          type='password'
-          name='password'
-          required={true}
-          onInput={(e) => (password = e.target.value)}
-        ></input>
-        
-        <div className='d-grid mt-4'>
-          <button type='submit' className='btn btn-primary btn-block'>Login now</button>
+// NavBar Component
+const NavBar = () => {
+  return (
+    <nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">Navbar</a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          dataBsToggle="collapse"
+          dataBsTarget="#navbarSupportedContent"
+          ariaControls="navbarSupportedContent"
+          ariaExpanded="false"
+          ariaLabel="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" ariaCurrent="page" href="#">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Link</a>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                dataBsToggle="dropdown"
+                ariaExpanded="false">Dropdown</a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a className="dropdown-item" href="#">Action</a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">Another action</a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider"></hr>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link disabled">Disabled</a>
+            </li>
+          </ul>
+          <form className="d-flex" role="search">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              ariaLabel="Search"
+            ></input>
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
         </div>
-      </form>
-    );
-  };
-  Simply.render(Form, '#root');
+      </div>
+    </nav>
+  );
+};
 
+// render NavBar
+Simply.render(NavBar, '#root')

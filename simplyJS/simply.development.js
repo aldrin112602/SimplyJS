@@ -26,6 +26,7 @@ const Simply = (() => {
         : { hasSrc: false, content: simplyScript.innerHTML, src: null };
     });
 
+
     /**
      * Gets the contents of a script tag with a src attribute.
      *
@@ -54,7 +55,10 @@ const Simply = (() => {
       })
     ).then((content) => {
       try {
-        eval(jsxToJs(content));
+        if(content.join('').length > 0) {
+          eval(jsxToJs(content));
+          console.log(jsxToJs(content));
+        }
       } catch (err) {
         console.error(err);
         console.trace();
@@ -89,21 +93,20 @@ const Simply = (() => {
     let regEx = /},\s(.+?)\)/g;
     let textNodes = jsCode.match(regEx);
     let copy = textNodes;
-    const filtered = textNodes.map((node) =>
-      node.match(/},\s(.+?)\)/)[1].trim()
-    );
-    filtered
-      .map((item, i) => {
-        return copy[i].replace(item, `'${item}'`);
-      })
-      .forEach((item, i) => {
-        jsCode = jsCode.replace(copy[i], item);
-      });
-    console.log(
-      "%c You are using SimplyJS framework in the browser.\nFor complete documentations, visit on https://github.com/aldrin112602/SimplyJS",
-      "color: lime; font-size: .8rem; background-color: #222;"
-    );
-
+    if(textNodes) {
+      const filtered = textNodes.map((node) =>
+        node.match(/},\s(.+?)\)/)[1].trim()
+      );
+      filtered
+        .map((item, i) => {
+          return copy[i].replace(item, `'${item}'`);
+        })
+        .forEach((item, i) => {
+          jsCode = jsCode.replace(copy[i], item);
+        });
+    
+    }
+    
     return jsCode;
   }
   /**
@@ -175,6 +178,11 @@ const Simply = (() => {
       }
     }
   };
+
+  console.log(
+    "%c You are using SimplyJS framework in the browser.\nFor complete documentations, visit on https://github.com/aldrin112602/SimplyJS",
+    "color: #fff; font-size: .8rem; background: #222;"
+  );
   /**
    * export the render function
    */
