@@ -13,7 +13,7 @@ or clone this repository
 ## Clone the repository:
 ```bash
 git clone https://github.com/aldrin112602/SimplyJS.git
-cd simplyjs-example
+cd simplyJS
 ```
 
 ## Usage
