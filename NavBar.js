@@ -29,7 +29,8 @@ const NavBar = () => {
                 href="#"
                 role="button"
                 dataBsToggle="dropdown"
-                ariaExpanded="false">Dropdown</a>
+                ariaExpanded="false"
+              >Dropdown</a>
               <ul className="dropdown-menu">
                 <li>
                   <a className="dropdown-item" href="#">Action</a>
@@ -56,7 +57,7 @@ const NavBar = () => {
               placeholder="Search"
               ariaLabel="Search"
             ></input>
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <button className="btn btn-outline-light" type="submit">Search</button>
           </form>
         </div>
       </div>
@@ -64,5 +65,4 @@ const NavBar = () => {
   );
 };
 
-// render NavBar
-Simply.render(NavBar, '#root')
+// No need to export Component

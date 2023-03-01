@@ -1,21 +1,10 @@
-/** 
- * 
- * @license SimplyJS v1.0.1
- * simply.min.development.js
- *
- * Copyright (c) Aldrin Caballero | Feb. 28, 2023
- * https://github.com/aldrin112602/SimplyJS
- * 
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- * 
- */
-
 /**
  * @license SimplyJS v1.0.1
+ *
  * simply.min.development.js
+ *
  * (c) Aldrin Caballero | Feb. 28, 2023
- * https://github.com/example/simply-js
+ * https://github.com/aldrin112602/SimplyJS
+ *
  * License: MIT
- */
-const Simply=(()=>{const findScript=()=>document.querySelectorAll('script[type="text/simply"]');if(findScript().length>0){const src=[...findScript()].map((e=>e.hasAttribute("src")?{hasSrc:!0,content:null,src:e.src}:{hasSrc:!1,content:e.innerHTML,src:null})),getContents=e=>new Promise(((t,n)=>{const r=new XMLHttpRequest;r.onload=e=>{t(r.responseText)},r.onerror=e=>{n(r.response)},r.open("GET",e),r.send(null)}));Promise.all(src.map((e=>e.hasSrc?getContents(e.src):e.content))).then((content=>{try{eval(jsxToJs(content))}catch(e){console.error(e),console.trace()}}))}function jsxToJs(e){let t=e.join("\n\n").replace(/<(\w+)/g,'createElement("$1", { ').replace(/(\w+)="(.*?)"/g,'$1: "$2", ').replace(/(\w+)='(.*?)'/g,'$1: "$2", ').replace(/(\w+)=\{(.*?)\}/g,"$1: $2, ").replace(/,(\s+|)>/g," }, ").replace(/{ >/g,"null,").replace(/className:/g,"className: ").replace(/onClick:/g,"onClick: ").replace(/<\/\w+>/g,"),").replace(/(\w+)>/g,"").replace(/(\w+)>(.*?)</g,'$1: "$2", ').replace(/>\s+</g,",").replace(/;\s*,/g,",").replace(/­/g,"").replace(/,\s*\)/g,")"),n=t.match(/},\s(.+?)\)/g),r=n;return n.map((e=>e.match(/},\s(.+?)\)/)[1].trim())).map(((e,t)=>r[t].replace(e,`'${e}'`))).forEach(((e,n)=>{t=t.replace(r[n],e)})),t}const fromCamelCase=e=>e.replace(/([A-Z])/g," $1").split(" ").join("-").toLowerCase(),createElement=(e,t,...n)=>{const r=document.createElement(e);return Object.keys(t||{}).forEach((e=>{e.startsWith("on")&&"function"==typeof t[e]?r.addEventListener(e.slice(2).toLowerCase(),t[e]):"className"===e?r.className=t[e]:r.setAttribute(fromCamelCase(e),t[e])})),n.forEach((e=>{"string"==typeof e?r.appendChild(document.createTextNode(e)):r.appendChild(e)})),r},render=(e,t,n)=>{if(n&&"function"==typeof n&&n(),"string"==typeof t&&(t=document.querySelector(t)),"function"==typeof e){const n=e();t&&t.appendChild(n)}else"object"==typeof e&&e instanceof Element&&t&&t.appendChild(e)};return{render:render}})();
+ */ const Simply=(()=>{let findScript=()=>document.querySelectorAll('script[type="text/simply"]');if(findScript().length>0){let src=[...findScript()].map(e=>e.hasAttribute("src")?{hasSrc:!0,content:null,src:e.src}:{hasSrc:!1,content:e.innerHTML,src:null}),getContents=e=>new Promise((t,r)=>{let n=new XMLHttpRequest;n.onreadystatechange=function(){4==this.readyState&&200==this.status&&t(n.responseText)},n.onerror=e=>{r(n.responseText)},n.open("GET",e),n.send(null)});Promise.all(src.map(e=>e.hasSrc?getContents(e.src):e.content)).then(content=>{let data=[];try{content.join("").length>0&&Promise.all(getImportFiles(content.join("")).map(e=>getContents(e))).then(res=>{content=data.concat(res,content),eval(jsxToJs(content))})}catch(err){console.error(err),console.trace()}})}function jsxToJs(e){let t=e.join("\n\n").replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs,"").replace(/{(\w+)?}/g,"$1(), ").replace(/<(\w+)/g,'createElement("$1", { ').replace(/(\w+)="(.*?)"/g,'$1: "$2", ').replace(/(\w+)='(.*?)'/g,'$1: "$2", ').replace(/(\w+)=\{(.*?)\}/g,"$1: $2, ").replace(/,(\s+|)>/g," }, ").replace(/{ >/g,"null,").replace(/className:/g,"className: ").replace(/onClick:/g,"onClick: ").replace(/<\/\w+>/g,"),").replace(/(\w+)>/g,"").replace(/(\w+)>(.*?)</g,'$1: "$2", ').replace(/>\s+</g,",").replace(/;\s*,/g,",").replace(/­/g,"").replace(/,\s*\)/g,")"),r=/},\s(.+?)\)/g,n=t.match(r),l=n;if(n){let c=n.map(e=>e.match(/},\s(.+?)\)/)[1].trim());c.map((e,t)=>l[t].replace(e,`'${e}'`)).forEach((e,r)=>{t=t.replace(l[r],e)})}return t}function getImportFiles(e){let t=/import\s+\w+\s+from\s+['"](\.[^'"]+)['"]/g,r=[],n;for(;null!==(n=t.exec(e));){let l=n[1];l.endsWith(".js")||(l+=".js"),r.push(l)}return r}let fromCamelCase=e=>e.replace(/([A-Z])/g," $1").split(" ").join("-").toLowerCase(),createElement=(e,t,...r)=>{let n=document.createElement(e);return Object.keys(t||{}).forEach(e=>{e.startsWith("on")&&"function"==typeof t[e]?n.addEventListener(e.slice(2).toLowerCase(),t[e]):"className"===e?n.className=t[e]:n.setAttribute(fromCamelCase(e),t[e])}),r.forEach(e=>{"string"==typeof e?n.appendChild(document.createTextNode(e)):n.appendChild(e)}),n},render=(e,t,r)=>{if(r&&"function"==typeof r&&r(),"string"==typeof t&&(t=document.querySelector(t)),"function"==typeof e){let n=e();t&&t.appendChild(n)}else"object"==typeof e&&e instanceof Element&&t&&t.appendChild(e)};return console.log("%c You are using SimplyJS framework in the browser.\nFor complete documentations, visit on https://github.com/aldrin112602/SimplyJS","color: #fff; font-size: .8rem; background: #222;"),{render}})();

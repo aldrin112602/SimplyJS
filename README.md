@@ -1,10 +1,36 @@
 # SimplyJS Intro
 Simply is a lightweight JavaScript framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
+
+Create Button Componet `Button.js`:
+```jsx
+// Button component
+const Button = () => {
+  let i = 0;
+
+  const increment = () => {
+    i++;
+    console.log(i);
+    alert(i);
+  }
+
+  return (
+    <button onClick={increment} class="btn btn-primary">Click me</button>
+  )
+
+}
+// In SimplyJS, no need to export component
+```
+
+Create Container Component `Container.js`
 ```javascript
+// import Button Component
+import Button from './Button';
+
 const Container = () => {
     return (
         <div className="container">
             <h1>Hello, world!</h1>
+            {Button}
             <p>This is a simple example of a component built with Simply.</p>
         </div>
     )
@@ -13,26 +39,8 @@ Simply.render(Container, "#root", () => {
     console.log('Rendered Success!')
 });
 ```
-
-SimplyJS is also similar to ReactJS that use `JSX` syntax:
-
-here the sample compiled output behind, `JSX` to valid JavaScript Syntax:
-```javascript
-const Container = () => {
-  return (
-    createElement("div", { className: "container" },
-       createElement("h1", null, "Hello, world!"),
-       createElement("p", null, "This is a simple example of a component built with Simply.")
-    );
-  );
-};
-
-Simply.render(Container, "#root", () => {
-    console.log('Rendered Success!')
-});
-```
 ---
-This code will render a `div` element with a class of `"container"`, containing an `h1` element with the text `"Hello, world!"` and a `p` element with some sample text. It will then append that div to the element with an ID of `"root"` in your HTML document.
+This code will render a `div` element with a class of `"container"`, containing an `h1` element with the text `"Hello, world!"`, `button` element with a class of `"btn btn-primary"` with an onclick event to increment the `i` variable. Also a `p` element with some sample text. It will then append that div to the element with an ID of `"root"` in your HTML document.
 
 The `Simply.render` method takes 3 arguments: a component function, container element and callback function. The component function should return a tree of Simply elements, which are plain JavaScript objects that describe a UI element. These elements can be nested, just like regular HTML, to build up a complete user interface.
 
@@ -96,9 +104,7 @@ const Form = () => {
       ></input>
       
       <div className="d-grid mt-4">
-        <button type="submit" className="btn btn-primary btn-block">
-          Login now
-        </button>
+        <button type="submit" className="btn btn-primary btn-block">Login now</button>
       </div>
     </form>
   );

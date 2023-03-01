@@ -26,7 +26,6 @@ const Simply = (() => {
         : { hasSrc: false, content: simplyScript.innerHTML, src: null };
     });
 
-
     /**
      * Gets the contents of a script tag with a src attribute.
      *
@@ -37,11 +36,13 @@ const Simply = (() => {
     const getContents = (src) => {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        xhr.onload = (ev) => {
-          resolve(xhr.responseText);
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(xhr.responseText);
+          }
         };
         xhr.onerror = (ev) => {
-          reject(xhr.response);
+          reject(xhr.responseText);
         };
         xhr.open("GET", src);
         xhr.send(null);
@@ -54,10 +55,15 @@ const Simply = (() => {
         return src.content;
       })
     ).then((content) => {
+      let data = [];
       try {
-        if(content.join('').length > 0) {
-          eval(jsxToJs(content));
-          console.log(jsxToJs(content));
+        if (content.join("").length > 0) {
+          Promise.all(
+            getImportFiles(content.join("")).map((path) => getContents(path))
+          ).then((res) => {
+            content = data.concat(res, content);
+            eval(jsxToJs(content));
+          });
         }
       } catch (err) {
         console.error(err);
@@ -74,6 +80,8 @@ const Simply = (() => {
   function jsxToJs(content) {
     let jsCode = content
       .join("\n\n")
+      .replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs, "")
+      .replace(/{(\w+)?}/g, "$1(), ")
       .replace(/<(\w+)/g, 'createElement("$1", { ')
       .replace(/(\w+)="(.*?)"/g, '$1: "$2", ')
       .replace(/(\w+)='(.*?)'/g, '$1: "$2", ')
@@ -93,7 +101,7 @@ const Simply = (() => {
     let regEx = /},\s(.+?)\)/g;
     let textNodes = jsCode.match(regEx);
     let copy = textNodes;
-    if(textNodes) {
+    if (textNodes) {
       const filtered = textNodes.map((node) =>
         node.match(/},\s(.+?)\)/)[1].trim()
       );
@@ -104,10 +112,27 @@ const Simply = (() => {
         .forEach((item, i) => {
           jsCode = jsCode.replace(copy[i], item);
         });
-    
     }
-    
+
     return jsCode;
+  }
+  /**
+   * Parses the given JavaScript code and extracts the file paths of the imported modules.
+   * @param {string} code - The JavaScript code.
+   * @return {string[]} An array of file paths of the imported modules.
+   */
+  function getImportFiles(code) {
+    const regEx = /import\s+\w+\s+from\s+['"](\.[^'"]+)['"]/g;
+    const filePaths = [];
+    let match;
+    while ((match = regEx.exec(code)) !== null) {
+      let filePath = match[1];
+      if (!filePath.endsWith(".js")) {
+        filePath += ".js";
+      }
+      filePaths.push(filePath);
+    }
+    return filePaths;
   }
   /**
    * Converts a camel case string to a hyphenated string.
