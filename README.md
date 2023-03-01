@@ -30,7 +30,7 @@ const Container = () => {
     return (
         <div className="container">
             <h1>Hello, world!</h1>
-            {Button}
+            <Button />
             <p>This is a simple example of a component built with Simply.</p>
         </div>
     )

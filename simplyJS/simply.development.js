@@ -63,6 +63,8 @@ const Simply = (() => {
           ).then((res) => {
             content = data.concat(res, content);
             eval(jsxToJs(content));
+            // console.log(jsxToJs(content));
+
           });
         }
       } catch (err) {
@@ -81,7 +83,8 @@ const Simply = (() => {
     let jsCode = content
       .join("\n\n")
       .replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs, "")
-      .replace(/{(\w+)?}/g, "$1(), ")
+      // .replace(/{{(\w+)?}}/g, "$1(), ")
+      .replace(/<(\w+)? \/>/g, "$1(), ")
       .replace(/<(\w+)/g, 'createElement("$1", { ')
       .replace(/(\w+)="(.*?)"/g, '$1: "$2", ')
       .replace(/(\w+)='(.*?)'/g, '$1: "$2", ')
