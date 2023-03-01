@@ -25,7 +25,7 @@ Create Container Component `Container.js`
 ```javascript
 // import Button Component
 import Button from './Button';
-
+// or with .js extension (optional) import Button from './Button.js';
 const Container = () => {
     return (
         <div className="container">
