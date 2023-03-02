@@ -1,3 +1,7 @@
+# SimplyJS framework
+[SimplyJS/demo/index.html](https://aldrin112602.github.io/SimplyJS/demo/)
+<img src="./image.png">
+
 # SimplyJS Intro
 Simply is a lightweight JavaScript framework for building user interfaces with plain JavaScript. It allows you to write UI components in a syntax that resembles HTML, but with the full power of JavaScript behind it. Here's a quick example:
 
