@@ -64,7 +64,6 @@ const Simply = (() => {
             content = data.concat(res, content);
             console.log(jsxToJs(content));
             eval(jsxToJs(content));
-            
           });
         }
       } catch (err) {
@@ -72,7 +71,6 @@ const Simply = (() => {
         console.trace();
       }
     });
-  
   }
   /**
    * Converts JSX code to JavaScript.
@@ -83,9 +81,16 @@ const Simply = (() => {
   function jsxToJs(content) {
     let jsCode = content
       .join("\n\n")
-      .replace(/<>|<\/>/g, '')
+      .replace(/<>|<\/>/g, "")
       .replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs, "")
       .replace(/<(\w+)? \/>/g, "$1(), ")
+      .replace(/<(\w+)([^>]*)\/>/g, (_, tag, props) => {
+        const propsStr = props.replace(
+          /(\w+)={([^{}]+|\{[^{}]*\})}/g,
+          '"$1": $2'
+        );
+        return `${tag}({${propsStr}}),`;
+      })
       .replace(/<(\w+)/g, 'createElement("$1", { ')
       .replace(/(\w+)="(.*?)"/g, '$1: "$2", ')
       .replace(/(\w+)='(.*?)'/g, '$1: "$2", ')
@@ -101,7 +106,7 @@ const Simply = (() => {
       .replace(/;\s*,/g, ",")
       .replace(/­/g, "")
       .replace(/,\s*\)/g, ")")
-      .replace(/{\/\*[\s\S]*?\*\/}/g, "")
+      .replace(/{\/\*[\s\S]*?\*\/}/g, "");
 
     let regEx = /},\s(.+?)\)/g;
     let textNodes = jsCode.match(regEx);
