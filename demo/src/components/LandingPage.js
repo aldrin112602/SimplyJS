@@ -13,6 +13,7 @@ const LandingPage = () => {
       <h4 class="text-white">Edit src/App.js and save to reload.</h4>
       <Button />
       <a class="text-secondary" href="https://github.com/aldrin112602/SimplyJS">View on github</a>
+    {/*  */}
     </div>
   );
 };

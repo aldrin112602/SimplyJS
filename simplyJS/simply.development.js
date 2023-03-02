@@ -62,6 +62,7 @@ const Simply = (() => {
             getImportFiles(content.join("")).map((path) => getContents(path))
           ).then((res) => {
             content = data.concat(res, content);
+            console.log(jsxToJs(content));
             eval(jsxToJs(content));
           });
         }
@@ -81,7 +82,6 @@ const Simply = (() => {
     let jsCode = content
       .join("\n\n")
       .replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs, "")
-      // .replace(/{{(\w+)?}}/g, "$1(), ")
       .replace(/<(\w+)? \/>/g, "$1(), ")
       .replace(/<(\w+)/g, 'createElement("$1", { ')
       .replace(/(\w+)="(.*?)"/g, '$1: "$2", ')
@@ -97,7 +97,8 @@ const Simply = (() => {
       .replace(/>\s+</g, ",")
       .replace(/;\s*,/g, ",")
       .replace(/­/g, "")
-      .replace(/,\s*\)/g, ")");
+      .replace(/,\s*\)/g, ")")
+      .replace(/{\/\*[\s\S]*?\*\/}/g, "");
 
     let regEx = /},\s(.+?)\)/g;
     let textNodes = jsCode.match(regEx);
