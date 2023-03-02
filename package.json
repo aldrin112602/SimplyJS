@@ -1,0 +1,12 @@
+{
+  "name": "simplyjs",
+  "version": "1.0.0",
+  "description": "[SimplyJS/demo/index.html](https://aldrin112602.github.io/SimplyJS/demo/)\r <img src=\"./image.png\">",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
