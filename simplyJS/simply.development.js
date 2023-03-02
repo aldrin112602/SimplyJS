@@ -81,6 +81,7 @@ const Simply = (() => {
   function jsxToJs(content) {
     let jsCode = content
       .join("\n\n")
+      .replace(/<>|<\/>/g, "")
       .replace(/import\s+.*?\s+from\s+(['"]).*?\1\s*;?\n*/gs, "")
       .replace(/<(\w+)? \/>/g, "$1(), ")
       .replace(/<(\w+)/g, 'createElement("$1", { ')

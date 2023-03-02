@@ -8,8 +8,11 @@ const Button = () => {
     }
 
     return (
+      <>
+        {/* return button element */}
         <button onClick={Count} className="btn btn-lg btn-primary btn-block">Click to Count!</button>
-    )
+      </>
+    );
 }
 
 // no need to export component
