@@ -62,7 +62,7 @@ const Simply = (() => {
             getImportFiles(content.join("")).map((path) => getContents(path))
           ).then((res) => {
             content = data.concat(res, content);
-            console.log(jsxToJs(content));
+            // console.log(jsxToJs(content));
             eval(jsxToJs(content));
           });
         }
